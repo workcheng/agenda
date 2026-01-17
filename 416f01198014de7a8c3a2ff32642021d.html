@@ -111,6 +111,28 @@
             transform: scale(1.1);
         }
         
+        .toggle-image-btn {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .toggle-image-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .toggle-image-btn.hidden {
+            background: var(--text-secondary);
+        }
+        
         h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
@@ -393,16 +415,17 @@
 <body>
     <div class="container">
         <header>
-            <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌙</button>
+            <button class="theme-toggle" id="themeToggle" title="切换主题">🌙</button>
             <h1>TRAE Friends @ 厦门</h1>
             <p class="subtitle">2025 年终回顾 - 我们和 TRAE 的这一年</p>
         </header>
         
         <div class="image-section">
-            <img src="416f01198014de7a8c3a2ff32642021d.jpg" alt="活动海报" class="original-image">
-            <div class="image-info">
+            <button class="toggle-image-btn" id="toggleImage" title="切换显示原图">🙈 隐藏原图</button>
+            <img src="416f01198014de7a8c3a2ff32642021d.jpg" alt="活动海报" class="original-image" id="originalImage">
+            <!-- <div class="image-info">
                 <p>图片文件: 416f01198014de7a8c3a2ff32642021d.jpg | 识别时间: 2026/1/17 16:46:02</p>
-            </div>
+            </div> -->
         </div>
         
         <div class="content">
@@ -526,6 +549,23 @@
                 themeToggle.setAttribute('aria-label', '切换到深色主题');
             }
         }
+        
+        // Image toggle functionality
+        const toggleImageBtn = document.getElementById('toggleImage');
+        const originalImage = document.getElementById('originalImage');
+        
+        // Toggle image visibility on button click
+        toggleImageBtn.addEventListener('click', () => {
+            originalImage.style.display = originalImage.style.display === 'none' ? 'block' : 'none';
+            
+            if (originalImage.style.display === 'none') {
+                toggleImageBtn.textContent = '👁️ 显示原图';
+                toggleImageBtn.classList.add('hidden');
+            } else {
+                toggleImageBtn.textContent = '🙈 隐藏原图';
+                toggleImageBtn.classList.remove('hidden');
+            }
+        });
     </script>
 </body>
 </html>
